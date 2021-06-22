@@ -1,5 +1,4 @@
 <template>
-  <h4>子组件{{$store.state.counter}}</h4>
   <tab-bar>
     <tab-bar-item path="/home">
       <template v-slot:item-icon>
@@ -54,8 +53,8 @@
 
 <script>
 
-  import TabBar from "@/components/tabbar/TabBar";
-  import TabBarItem from "@/components/tabbar/TabBarItem";
+  import TabBar from "@/components/common/tabbar/TabBar";
+  import TabBarItem from "@/components/common/tabbar/TabBarItem";
 
   export default {
     name: "MainTabBar",
