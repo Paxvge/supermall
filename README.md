@@ -1,4 +1,4 @@
-# vuecli4_tabbar
+# supermall
 
 ## Project setup
 ```

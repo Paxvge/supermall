@@ -10,8 +10,8 @@ export function getHomeMultidata() {
   })
 }
 
-export function getHomeData(type, page) {
-  return axios({
+export function getHomeGoods(type, page) {
+  return request({
     url: '/home/data',
     params: {
       type,
