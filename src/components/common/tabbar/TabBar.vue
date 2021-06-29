@@ -20,6 +20,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 9;
   box-shadow: 0 -3px 15px rgba(100, 100, 100, .15);
   }
 

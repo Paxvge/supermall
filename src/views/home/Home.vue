@@ -1,10 +1,10 @@
 <template>
   <div id="home">
-    <!--导航-->
+    <!--导航栏-->
     <nav-bar class="home-nav">
       <template v-slot:center>购物街</template>
     </nav-bar>
-
+    <!--用于第一个tabControl上拉消失后固定在顶部，达到吸顶的效果-->
     <tab-control :titles="['流行','新款','精选']"
                  @tabItemClick="tabClick"
                  ref="tabControl1"
@@ -32,6 +32,7 @@
       <!--商品列表-->
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
+
     <!--返回顶部-->
     <back-top @click="backClick" v-show="isShowBackTop"></back-top>
   </div>
@@ -42,7 +43,6 @@
   import TabControl from "@/components/content/tabControl/TabControl";
   import GoodsList from "@/components/content/goods/GoodsList";
   import Scroll from "@/components/common/scroll/Scroll";
-  import BackTop from "@/components/content/backTop/BackTop";
 
   import HomeSwiper from "./childComps/HomeSwiper";
   import RecommendView from "./childComps/RecommendView";
@@ -50,6 +50,7 @@
 
   import {getHomeMultidata, getHomeGoods} from  "@/network/home";
   import {debounce} from "@/common/utils";
+  import {itemListenerMixin, backTopMixin} from "@/common/mixin";
 
   export default {
     name: "Home",
@@ -60,9 +61,10 @@
       HomeSwiper,
       RecommendView,
       FeatureView,
-      Scroll,
-      BackTop
+      Scroll
     },
+    // 混入模块
+    mixins: [itemListenerMixin, backTopMixin],
     data() {
       return {
         banners: [],
@@ -73,7 +75,6 @@
           'sell': {page: 0, list: []}
         },
         currentType: 'pop',
-        isShowBackTop: false,
         tabOffsetTop: 0,
         isTabFixed: false,
         saveY: 0
@@ -94,19 +95,18 @@
       this.getHomeGoods1('sell');
     },
     mounted() {
-      // 图片加载完成的事件监听，即监听item中图片加载完成
-      // 防抖函数debounce
-      const refresh = debounce(this.$refs.scroll.refresh, 200);
-      this.$bus.$on('itemImageLoad', () => {
-        this.$refs.scroll && refresh();
-      })
+
     },
     activated() {
       this.$refs.scroll.refresh();
       this.$refs.scroll.scrollTo(0, this.saveY, 0);
     },
     deactivated() {
+      // 1.保存Y值
       this.saveY = this.$refs.scroll.getScrollY();
+
+      // 2.取消全局事件的监听
+      this.$bus.$off('itemImageLoad', this.itemImgListener);
     },
     methods: {
       /**
@@ -126,9 +126,6 @@
         // 同步两个tabControl
         this.$refs.tabControl1.currentIndex = index;
         this.$refs.tabControl2.currentIndex = index;
-      },
-      backClick() {
-        this.$refs.scroll.scrollTo(0, 0, 500)
       },
       contentScroll(position) {
         // 1.判断BackTop是否显示

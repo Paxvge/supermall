@@ -104,23 +104,23 @@
       <li>列表100</li>
     </ul>
   </div>
+
 </template>
 
 <script>
-  import BScroll from 'better-scroll'
-
   export default {
     name: "Category",
     data() {
       return {
-        scroll: null
+
       }
     },
+    components: {
+
+    },
+    created() {
+    },
     mounted() {
-      this. scroll = new BScroll(document.querySelector('.wrapper'), {
-
-      })
-
     }
   }
 </script>

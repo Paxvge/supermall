@@ -1,6 +1,6 @@
 <template>
-  <div class="goods-item">
-    <img :src="goodsItem.show.img" @load="imageLoad" alt="精选商品图片">
+  <div class="goods-item" @click="itemClick">
+    <img :src="showImage" @load="imageLoad" alt="精选商品图片">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="price">￥{{goodsItem.price}}</span>
@@ -20,9 +20,17 @@
         }
       }
     },
+    computed: {
+      showImage() {
+        return this.goodsItem.image || this.goodsItem.show.img;
+      }
+    },
     methods: {
       imageLoad() {
         this.$bus.$emit('itemImageLoad');
+      },
+      itemClick() {
+          this.$router.push('/detail/' + this.goodsItem.iid);
       }
     }
   }

@@ -5,6 +5,7 @@ const Home = () => import('@/views/home/Home');
 const Category = () => import('@/views/category/Category');
 const Cart = () => import('@/views/cart/Cart');
 const Profile = () => import('@/views/profile/Profile');
+const Detail = () => import('@/views/detail/Detail')
 
 // 创建路由对象
 const routes = [
@@ -14,10 +15,12 @@ const routes = [
   },
   {
     path: '/home',
+    name: 'home',
     component: Home
   },
   {
     path: '/category',
+    name: 'category',
     component: Category
   },
   {
@@ -27,7 +30,13 @@ const routes = [
   },
   {
     path: '/profile',
+    name: 'profile',
     component: Profile
+  },
+  {
+    path: '/detail/:iid',
+    name: 'detail',
+    component: Detail
   }
 ]
 
