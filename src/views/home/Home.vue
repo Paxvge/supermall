@@ -49,7 +49,6 @@
   import FeatureView from "./childComps/FeatureView";
 
   import {getHomeMultidata, getHomeGoods} from  "@/network/home";
-  import {debounce} from "@/common/utils";
   import {itemListenerMixin, backTopMixin} from "@/common/mixin";
 
   export default {
@@ -175,6 +174,7 @@
   .home-nav {
     background-color: var(--color-tint);
     color: #fff;
+    font-weight: bold;
     /*position: fixed;*/
     /*top: 0;*/
     /*right: 0;*/
@@ -195,6 +195,7 @@
   .tab-control {
     background-color: #fff;
     position: relative;
+    top: 44px;
     z-index: 99;
   }
 </style>

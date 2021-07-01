@@ -1,15 +1,17 @@
 <template>
-  <div class="goods">
+  <grid-view class="goods">
     <goods-list-item v-for="item in goods" :goods-item="item"></goods-list-item>
-  </div>
+  </grid-view>
 </template>
 
 <script>
+  import GridView from '@/components/common/gridView/GridView'
   import GoodsListItem from "./GoodsListItem";
 
   export default {
     name: "GoodsList",
     components: {
+      GridView,
       GoodsListItem
     },
     props: {
@@ -25,10 +27,10 @@
 </script>
 
 <style scoped>
-  .goods {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-  }
+  /*.goods {*/
+  /*  display: flex;*/
+  /*  flex-wrap: wrap;*/
+  /*  justify-content: space-evenly;*/
+  /*}*/
 
 </style>

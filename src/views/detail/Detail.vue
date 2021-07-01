@@ -25,12 +25,15 @@
       <detail-bottom-bar @addCart="addToCart"></detail-bottom-bar>
       <!--返回顶部-->
       <back-top @click="backClick" v-show="isShowBackTop"></back-top>
+      <!--添加购物车弹窗-->
+      <toast :message="message" :show="show"></toast>
     </div>
 </template>
 
 <script>
   import Scroll from "@/components/common/scroll/Scroll";
   import GoodsList from "@/components/content/goods/GoodsList";
+  import Toast from "@/components/common/toast/Toast";
 
   import DetailNavBar from "./childComps/DetailNavBar";
   import DetailSwiper from "./childComps/DetailSwiper";
@@ -50,6 +53,7 @@
     components: {
       Scroll,
       GoodsList,
+      Toast,
       DetailNavBar,
       DetailSwiper,
       DetailBaseInfo,
@@ -76,6 +80,8 @@
         detailParamY: null,
         detailCommentY: null,
         detailRecommendsY: null,
+        message: '',
+        show: false
       }
     },
     created() {
@@ -170,6 +176,23 @@
       },
       addToCart() {
         // 1.获取购物车需要展示的信息
+        const product = {};
+        product.image = this.topImages[0];
+        product.title = this.goods.title;
+        product.desc = this.detailInfo.desc;
+        product.price = this.goods.realPrice;
+        product.iid = this.iid;
+
+        // 2.将商品添加到购物车里
+        this.$store.dispatch('addCart', product).then(res => {
+          this.show = true;
+          this.message = res;
+
+          setTimeout(() => {
+            this.show = false;
+            this.message = '';
+          }, 1000)
+        })
       }
     }
   }
@@ -185,11 +208,16 @@
 
   .detail-nav {
     background-color: #fff;
-    position: relative;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
     z-index: 999;
   }
 
   .content {
     height: calc(100% - 44px - 53px);
+    position: relative;
+    top: 44px;
   }
 </style>

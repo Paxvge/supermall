@@ -40,7 +40,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-
+    z-index: 999;
     display: flex;
     text-align: center;
   }
@@ -67,7 +67,7 @@
   }
 
   .bar-left .service {
-    background-position:0 -54px;
+    background-position:0 -53px;
   }
 
   .bar-left .shop {
@@ -85,7 +85,7 @@
   .bar-right .cart {
     flex: 3;
     background-color: #ffe817;
-    color: #333;
+    color: #444;
   }
 
   .bar-right .buy {
