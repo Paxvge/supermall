@@ -6,6 +6,7 @@ import Bus from './common/bus'
 
 const app = createApp(App)
 
+// 事件总线
 app.config.globalProperties.$bus = Bus
 
 app.use(store).use(router).mount('#app')

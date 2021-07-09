@@ -47,7 +47,6 @@
         <div slot="item-text">我的</div>
       </template>
     </tab-bar-item>
-
   </tab-bar>
 </template>
 
