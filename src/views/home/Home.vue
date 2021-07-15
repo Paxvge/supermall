@@ -8,7 +8,7 @@
     <tab-control :titles="['流行','新款','精选']"
                  @tabItemClick="tabClick"
                  ref="tabControl1"
-                 class="tab-control"
+                 class="tab-control1"
                  v-show="isTabFixed">
     </tab-control>
 
@@ -192,7 +192,7 @@
     left: 0;
   }
 
-  .tab-control {
+  .tab-control1 {
     background-color: #fff;
     position: relative;
     top: 44px;
